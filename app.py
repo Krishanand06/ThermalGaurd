@@ -48,21 +48,14 @@ with col1:
     suggestions = search_cities(location_query, API_KEY, limit=5)
 
     if suggestions:
-        location_label = st.selectbox("Select Location", options=suggestions)
+        loc_map = {s["label"]: s for s in suggestions}
+        location_label = st.selectbox("Select Location", options=list(loc_map.keys()))
+        selected_loc = loc_map.get(location_label)
     elif location_query:
         st.error("No results found. Try a different spelling.")
-        location_label = ""
+        selected_loc = None
     else:
-        location_label = ""
-
-    # Build query string for the API
-    if location_label:
-        parts = [p.strip() for p in location_label.split(",")]
-        city_name = parts[0]
-        country_code = parts[-1] if len(parts) > 1 else ""
-        location = f"{city_name},{country_code}" if country_code else city_name
-    else:
-        location = ""
+        selected_loc = None
 
 with col2:
     activity = st.selectbox(
@@ -83,8 +76,8 @@ st.caption(f"**Activity Profile**: {activity_info['label']} — *{activity_info[
 st.divider()
 
 # --- Main Logic ---
-if location:
-    weather = get_current_weather(location, API_KEY)
+if selected_loc:
+    weather = get_current_weather(selected_loc["lat"], selected_loc["lon"], API_KEY)
     wet_bulb = calculate_wet_bulb(weather["temp_c"], weather["humidity"])
     adjusted_tw = apply_clothing_adjustment(wet_bulb, ppe_on)
     risk = categorize_risk(adjusted_tw, acclimatized, activity)
@@ -190,7 +183,7 @@ st.divider()
 # --- Predictive Planner ---
 st.subheader("Predictive Planner — Next 24 Hours")
 
-forecast_data = get_forecast(location, API_KEY)
+forecast_data = get_forecast(selected_loc["lat"], selected_loc["lon"], API_KEY)
 
 if forecast_data:
     fc_df = pd.DataFrame(forecast_data)

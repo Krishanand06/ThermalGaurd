@@ -2,7 +2,7 @@
 import requests
 
 
-def search_cities(query: str, api_key: str, limit: int = 5) -> list[str]:
+def search_cities(query: str, api_key: str, limit: int = 5) -> list[dict]:
     """City suggestions from OpenWeather Geocoding API."""
     if not query or not api_key:
         return []
@@ -23,16 +23,20 @@ def search_cities(query: str, api_key: str, limit: int = 5) -> list[str]:
             label = f"{name}, {state}, {country}" if state else f"{name}, {country}"
             if label.lower() not in seen:
                 seen.add(label.lower())
-                results.append(label)
+                results.append({
+                    "label": label,
+                    "lat": item["lat"],
+                    "lon": item["lon"]
+                })
         return results
     except Exception:
         return []
 
 
-def get_current_weather(city: str, api_key: str) -> dict:
-    """Real-time weather for a city."""
+def get_current_weather(lat: float, lon: float, api_key: str) -> dict:
+    """Real-time weather for a location."""
     url = "https://api.openweathermap.org/data/2.5/weather"
-    params = {"q": city, "appid": api_key, "units": "metric"}
+    params = {"lat": lat, "lon": lon, "appid": api_key, "units": "metric"}
     resp = requests.get(url, params=params, timeout=10)
     resp.raise_for_status()
     data = resp.json()
@@ -47,11 +51,11 @@ def get_current_weather(city: str, api_key: str) -> dict:
     }
 
 
-def get_forecast(city: str, api_key: str) -> list:
+def get_forecast(lat: float, lon: float, api_key: str) -> list:
     """5-day / 3-hour forecast for the trend chart."""
     try:
         url = "https://api.openweathermap.org/data/2.5/forecast"
-        params = {"q": city, "appid": api_key, "units": "metric"}
+        params = {"lat": lat, "lon": lon, "appid": api_key, "units": "metric"}
         resp = requests.get(url, params=params, timeout=10)
         resp.raise_for_status()
         data = resp.json()
