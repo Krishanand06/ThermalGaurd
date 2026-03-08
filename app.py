@@ -86,7 +86,7 @@ else:
     st.stop()
 
 # --- Current Conditions ---
-st.subheader(f"Current Conditions — {weather['city_name']}, {weather.get('country', '')}")
+st.subheader(f"Current Conditions — {selected_loc['label']}")
 
 m1, m2, m3, m4 = st.columns(4)
 m1.metric("Ambient Temp", f"{weather['temp_c']}°C")
@@ -266,7 +266,7 @@ st.subheader("Assessment Summary")
 summary_data = {
     "Metric": ["Location", "Ambient Temp", "Humidity", "Wind Speed", "Raw Wet Bulb", "Adjusted Wet Bulb", "PPE Active", "Acclimatized", "Activity Level", "Risk Level", "Work/Rest", "Hydration"],
     "Value": [
-        f"{weather['city_name']}, {weather.get('country', '')}",
+        selected_loc["label"],
         f"{weather['temp_c']}°C",
         f"{weather['humidity']}%",
         f"{weather['wind_speed_kmh']} km/h",
