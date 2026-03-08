@@ -1,10 +1,13 @@
 # ThermalGuard DSS
 
 **Website Link** [https://thermalgaurd.streamlit.app/](https://thermalgaurd.streamlit.app/)
+<img width="1803" height="894" alt="image" src="https://github.com/user-attachments/assets/59162d23-032f-41ee-950f-46860e67aa31" />
+
 
 A web-based Decision Support System that helps prevent heat-related injuries for outdoor workers. It pulls real-time weather data, calculates the Wet Bulb Globe Temperature (WBGT), and tells you whether it's safe to work outside based on OSHA/NIOSH safety standards.
 
 ## How It Works
+<img width="1712" height="599" alt="image" src="https://github.com/user-attachments/assets/f8be825c-ac9d-4655-8cfa-dc45bc2d4b05" />
 
 1. The user searches for any city in the world using the OpenWeatherMap API.
 2. The app fetches the current temperature, humidity, and wind speed.
