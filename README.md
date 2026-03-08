@@ -45,7 +45,7 @@ Tw = T * atan(0.151977 * sqrt(RH + 8.313659))
 
 ## Tech Stack
 
-- **Python** — core language
-- **Streamlit** — web framework
-- **Plotly** — interactive charts (gauge + forecast)
-- **OpenWeatherMap API** — live weather data
+- **Python** - core language
+- **Streamlit** - web framework
+- **Plotly** - interactive charts (gauge + forecast)
+- **OpenWeatherMap API** - live weather data

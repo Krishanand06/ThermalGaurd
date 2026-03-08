@@ -57,7 +57,7 @@ def categorize_risk(adjusted_tw: float, acclimatized: bool, intensity: str = "Mo
     if adjusted_tw < thresholds[0]:
         level = "Safe"
         color = "#00C853"
-        work_rest = "Normal operations — no mandatory rest required."
+        work_rest = "Normal operations - no mandatory rest required."
         hydration = "Encourage water intake: 500 mL per hour."
         actions = []
     elif adjusted_tw < thresholds[1]:
