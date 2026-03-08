@@ -28,7 +28,7 @@ API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
 
 # Title
 st.title("ThermalGuard DSS")
-st.caption("Occupational Heat Stress Decision Support System — OSHA / NIOSH Compliant")
+st.caption("Occupational Heat Stress Decision Support System - OSHA / NIOSH Compliant")
 
 st.divider()
 
@@ -71,7 +71,7 @@ with col3:
     acclimatized = st.checkbox("Crew is Acclimatized (>14 days)", value=True, help="Unacclimatized workers have stricter safety thresholds")
 
 activity_info = get_activity_modifier(activity)
-st.caption(f"**Activity Profile**: {activity_info['label']} — *{activity_info['examples']}* (Metabolic Rate: ≤{activity_info['metabolic_w']} W)")
+st.caption(f"**Activity Profile**: {activity_info['label']} - *{activity_info['examples']}* (Metabolic Rate: ≤{activity_info['metabolic_w']} W)")
 
 st.divider()
 
@@ -86,7 +86,7 @@ else:
     st.stop()
 
 # --- Current Conditions ---
-st.subheader(f"Current Conditions — {selected_loc['label']}")
+st.subheader(f"Current Conditions - {selected_loc['label']}")
 
 m1, m2, m3, m4 = st.columns(4)
 m1.metric("Ambient Temp", f"{weather['temp_c']}°C")
@@ -149,7 +149,7 @@ with info_col:
     |--------|-------|
     | Raw Wet Bulb | {wet_bulb}°C |
     | PPE Penalty | {"+ 5.0°C" if ppe_on else "None"} |
-    | Acclimatized | {"Yes" if acclimatized else "No — Stricter Thresholds"} |
+    | Acclimatized | {"Yes" if acclimatized else "No"} |
     """)
 
 # Alert messages
@@ -181,7 +181,7 @@ with sop2:
 st.divider()
 
 # --- Predictive Planner ---
-st.subheader("Predictive Planner — Next 24 Hours")
+st.subheader("Predictive Planner - Next 24 Hours")
 
 forecast_data = get_forecast(selected_loc["lat"], selected_loc["lon"], API_KEY)
 
@@ -286,4 +286,4 @@ st.dataframe(pd.DataFrame(summary_data), use_container_width=True, hide_index=Tr
 st.divider()
 
 # Footer
-st.caption("ThermalGuard DSS v1.0 — Built with Streamlit · Powered by OpenWeatherMap · OSHA/NIOSH Compliant")
+st.caption("ThermalGuard DSS v1.0 - Built with Streamlit · Powered by OpenWeatherMap · OSHA/NIOSH Compliant")
