@@ -16,7 +16,6 @@ st.set_page_config(page_title="ThermalGuard DSS", page_icon="TG", layout="wide")
 # Minimal styling - just dark theme basics
 st.markdown("""
 <style>
-    .stApp { background-color: #0d1117; }
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
